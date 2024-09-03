@@ -1,10 +1,15 @@
-import './App.css'
+import './styles/App.css'
+import GameBoard from './components/gameBoard'
+import Score from './components/score'
 
 function App() {
 
   return (
     <>
-      <p>Hello World!</p>
+      <div className='header_container'>
+        <Score currentScore={} bestScore={} />
+      </div>
+      <GameBoard />
     </>
   )
 }
