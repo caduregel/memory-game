@@ -1,10 +1,11 @@
-function Card() {
+function Card({ id, name, image, setClicked }) {
 
-    return (
-      <>
-        <p>card</p>
-      </>
-    )
-  }
-  
-  export default Card
+  return (
+    <div onClick={() => { setClicked(id) }}>
+      <p>{name}</p>
+      <p>{image}</p>
+    </div>
+  )
+}
+
+export default Card
