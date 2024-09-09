@@ -3,3 +3,10 @@
     grid-template-columns: repeat(6, 16%);
     grid-template-rows: repeat(2, 50%);
 }
+
+#win-screen {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 30vh;
+}

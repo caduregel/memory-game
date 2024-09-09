@@ -11,7 +11,6 @@ function App() {
   const updateScore = (newScore) => {
     if (newScore > bestScore) {
       setBestScore(newScore)
-      console.log(newScore)
     }
     setCurrentScore(newScore)
   }

@@ -1,16 +1,23 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import Card from "./card"
+import getPokemon from "./apiHook"
 import "../styles/gameBoard.css"
 
 function GameBoard({ updateScore, currentScore }) {
     const [clickedCards, setClickedCards] = useState([])
-
-    // Create an array of items to be later be filled with the proper name and image values using an API
-    const cards = new Array(12)
-    for (let i = 0; i < cards.length; i++) {
-        cards[i] = [i, 'name', '']
-    }
-    shuffleCards(cards)
+    const [pokemon, setPokemon] = useState()
+    const [pokemonPending, setPokemonPending] = useState(true)
+    useEffect(() => {
+        const awaitPokemon = async () => {
+            const connection = await getPokemon()
+            shuffleCards(connection)
+            setPokemon(connection)
+            setPokemonPending(false)
+        }
+        awaitPokemon()
+    }, [])
+    // const shuffledPokemon = shuffleCards(pokemon)
+    // setPokemon(shuffledPokemon)
 
     // Add a card to the clicked cards
     const addCardToClicked = (id) => {
@@ -28,18 +35,33 @@ function GameBoard({ updateScore, currentScore }) {
             setClickedCards([])
             updateScore(0, false)
         }
+        shuffleCards(pokemon)
     }
+    if (currentScore == 12) {
+        return (<div>
+            <h1 id="win-screen">You have won!</h1>
+        </div>)
+    } else {
 
+        if (pokemonPending == false) {
+            return (
+                <div id="game-board-container">
+                    {
+                        pokemon.map(card => {
+                            return (
+                                <Card key={card.id} id={card.id} name={card.name} image={card.image} setClicked={addCardToClicked} />
+                            )
+                        })}
 
-    return (
-        <div id="game-board-container">
-            {cards.map(card => {
-                return (
-                    <Card key={card[0]} id={card[0]} name={card[1]} image={card[2]} setClicked={addCardToClicked} />
-                )
-            })}
-        </div>
-    )
+                </div>
+            )
+        } else {
+            return (
+                <>
+                    <h1>loading...</h1></>
+            )
+        }
+    }
 }
 
 export default GameBoard
