@@ -1,0 +1,5 @@
+#game-board-container {
+    display: grid;
+    grid-template-columns: repeat(6, 16%);
+    grid-template-rows: repeat(2, 50%);
+}

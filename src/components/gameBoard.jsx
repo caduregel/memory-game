@@ -1,5 +1,6 @@
 import { useState } from "react"
 import Card from "./card"
+import "../styles/gameBoard.css"
 
 function GameBoard({ updateScore, currentScore }) {
     const [clickedCards, setClickedCards] = useState([])
@@ -7,7 +8,7 @@ function GameBoard({ updateScore, currentScore }) {
     // Create an array of items to be later be filled with the proper name and image values using an API
     const cards = new Array(12)
     for (let i = 0; i < cards.length; i++) {
-        cards[i] = [i, 1 + i + 'name', '']
+        cards[i] = [i, 'name', '']
     }
     shuffleCards(cards)
 
@@ -24,23 +25,20 @@ function GameBoard({ updateScore, currentScore }) {
             setClickedCards(clicked)
         } else {
             // Set the score
+            setClickedCards([])
             updateScore(0, false)
         }
     }
 
-    const clearClicked = () => {
-        setClickedCards([])
-    }
-
 
     return (
-        <>
+        <div id="game-board-container">
             {cards.map(card => {
                 return (
                     <Card key={card[0]} id={card[0]} name={card[1]} image={card[2]} setClicked={addCardToClicked} />
                 )
             })}
-        </>
+        </div>
     )
 }
 

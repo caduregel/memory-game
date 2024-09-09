@@ -1,0 +1,14 @@
+.card-container {
+    background-color: #e4e4e4;
+    padding: 10px;
+    border-radius: 10px;
+    margin: 10px;
+    user-select: none;
+    caret-color: transparent;
+
+}
+
+.card-container:hover{
+    filter: brightness(95%);
+    transform: scale(1.05);
+}
