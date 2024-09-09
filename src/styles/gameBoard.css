@@ -10,3 +10,10 @@
     align-items: center;
     margin-top: 30vh;
 }
+
+@media screen and (max-width: 600px){
+    #game-board-container{
+        display: flex;
+        flex-direction: column;
+    }
+}
